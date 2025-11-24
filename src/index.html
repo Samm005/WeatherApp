@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
+    <link href="src/output.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>WeatherApp</title>
+  </head>
+  <body>
+    <form id="Weather">
+      <input type="text" placeholder="Enter City Name" id="cityName" />
+      <button id="search" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button id="CurrentLocation" type="button">
+        <i class="fa-solid fa-location-crosshairs"></i>
+      </button>
+    </form>
+
+    <select id="Dropdown"></select>
+
+    <main id="displayCard">
+      <article>
+        <h3 id="City">Bangalore</h3>
+        <p id="Temp">35&deg</p>
+        <p id="humidity">Humidity: 52%</p>
+        <p id="Description">Sunny and clear</p>
+        <p id="WeatherIcon">☀️</p>
+        <p id="Errormsg">Cannot fetch data</p>
+        <button id="Toggle" type="button">Switch to &degF</button>
+      </article>
+    </main>
+  </body>
+</html>
