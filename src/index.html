@@ -16,6 +16,7 @@
     class="font-serif bg-linear-to-r/increasing from-green-500 to-pink-600 m-0"
   >
     <div class="flex flex-row items-center justify-center gap-6">
+      <!--Form for weather data-->
       <form id="Weather" class="m-6 flex justify-center gap-6 items-center">
         <input
           type="text"
@@ -23,6 +24,7 @@
           id="cityName"
           class="p-3 text-2xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900"
         />
+        <!--Select the city to search-->
         <button
           id="search"
           type="submit"
@@ -30,6 +32,7 @@
         >
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        <!--Select current Location-->
         <button
           id="CurrentLocation"
           type="button"
@@ -38,6 +41,8 @@
           <i class="fa-solid fa-location-crosshairs"></i>
         </button>
       </form>
+
+      <!--Dropdown menu to show history -->
       <select
         id="Dropdown"
         class="hidden w-xs p-3 text-2xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900 bg-white text-purple-900 shadow-md cursor-pointer hover:border-purple-900"
@@ -45,6 +50,7 @@
     </div>
 
     <br /><br />
+    <!--Displaying the weather at selected area-->
     <main id="displayCard" class="hidden">
       <article
         class="p-3 m-2 rounded-2xl bg-linear-65 from-yellow-500/85 to-rose-600/85 shadow-xl/65 border-2 min-w-[500px] flex flex-col items-center"
