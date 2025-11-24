@@ -4,35 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="script.js"></script>
-    <link href="src/output.css" rel="stylesheet" />
+    <link href="output.css" rel="stylesheet" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
       rel="stylesheet"
     />
     <title>WeatherApp</title>
   </head>
-  <body>
-    <form id="Weather">
-      <input type="text" placeholder="Enter City Name" id="cityName" />
-      <button id="search" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-      <button id="CurrentLocation" type="button">
-        <i class="fa-solid fa-location-crosshairs"></i>
-      </button>
-    </form>
 
-    <select id="Dropdown"></select>
+  <body
+    class="font-serif bg-linear-to-r/increasing from-green-500 to-pink-600 m-0"
+  >
+    <div class="flex flex-row items-center justify-center gap-6">
+      <form id="Weather" class="m-6 flex justify-center gap-6 items-center">
+        <input
+          type="text"
+          placeholder="Enter City Name"
+          id="cityName"
+          class="p-3 text-2xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900"
+        />
+        <button
+          id="search"
+          type="submit"
+          class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button
+          id="CurrentLocation"
+          type="button"
+          class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95"
+        >
+          <i class="fa-solid fa-location-crosshairs"></i>
+        </button>
+      </form>
+      <select
+        id="Dropdown"
+        class="hidden w-xs p-3 text-2xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900 bg-white text-purple-900 shadow-md cursor-pointer hover:border-purple-900"
+      ></select>
+    </div>
 
-    <main id="displayCard">
-      <article>
-        <h3 id="City">Bangalore</h3>
-        <p id="Temp">35&deg</p>
-        <p id="humidity">Humidity: 52%</p>
-        <p id="Description">Sunny and clear</p>
-        <p id="WeatherIcon">☀️</p>
-        <p id="Errormsg">Cannot fetch data</p>
-        <button id="Toggle" type="button">Switch to &degF</button>
+    <br /><br />
+    <main id="displayCard" class="hidden">
+      <article
+        class="p-3 m-2 rounded-2xl bg-linear-65 from-yellow-500/85 to-rose-600/85 shadow-xl/65 border-2 min-w-[500px] flex flex-col items-center"
+      >
+        <h3 id="City" class="text-2xl font-bold mt-0 mb-2"></h3>
+        <br />
+        <p id="Temp" class="text-xl mt-0 mb-2"></p>
+        <br />
+        <p id="humidity" class="text-xl mt-0 mb-2"></p>
+        <br />
+        <p id="Description" class="text-xl mt-0 mb-2"></p>
+        <br />
+        <p id="WeatherIcon" class="text-5xl mt-0 mb-2 font-bold"></p>
+        <br />
+        <p id="Errormsg" class="text-xl mt-0 mb-2 font-extrabold"></p>
+        <br />
+        <button
+          id="Toggle"
+          type="button"
+          class="text-xl mt-0 mb-2 border-2 hover:scale-95 rounded-2xl p-2 bg-green-600 shadow-xl/65"
+        >
+          Switch to &degF</button
+        ><br />
       </article>
     </main>
   </body>
