@@ -59,13 +59,18 @@ function displayweather(data) {
   const todayTemp = Math.round(today.main.temp - 273.15);
   const todayHumidity = today.main.humidity;
   const todayDesc = today.weather[0].description;
-  const todayIcon = today.weather[0].icon;
+  const todayweatherid = today.weather[0].id;
+  const todayWS = today.wind.speed;
+  const todayWD = today.wind.deg;
 
   date.textContent = todayDate;
   Temp.textContent = `Temperature: ${todayTemp}°C`;
   humidity.textContent = `Humidity: ${todayHumidity}%`;
+  wind.textContent = `Wind: ${todayWS} m/s, ${todayWD}°`;
   Description.textContent = todayDesc;
-  WeatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${todayIcon}@2x.png">`;
+
+  const weatherToday = weatherEmoji(todayweatherid);
+  WeatherIcon.textContent = weatherToday.emoji;
 
   const indexes = [0, 8, 16, 24, 32];
 
@@ -74,26 +79,60 @@ function displayweather(data) {
     const fDate = new Date(item.dt * 1000).toDateString();
     const fTemp = Math.round(item.main.temp - 273.15);
     const fHum = item.main.humidity;
+    const fwindspeed = item.wind.speed;
+    const fwinddeg = item.wind.deg;
+    const fWeather = weatherEmoji(item.weather[0].id);
     const fDesc = item.weather[0].description;
-    const fIcon = item.weather[0].icon;
 
     const card = document.createElement("div");
-    card.className =
-      "bg-white p-4 rounded-xl shadow-xl text-center w-52 flex flex-col items-center";
+    card.className = `p-4 rounded-xl shadow-xl text-center w-52 flex flex-col items-center text-white`;
+    card.style.background = fWeather.bg;
 
     card.innerHTML = `
       <h3 class="text-lg font-bold">${fDate}</h3>
-      <img src="https://openweathermap.org/img/wn/${fIcon}@2x.png">
-      <p class="text-xl font-semibold">${fTemp}°C</p>
-      <p>Humidity: ${fHum}%</p>
-      <p>${fDesc}</p>
+      <p class="text-xl">${fTemp}°C</p>
+      <p class="text-xl">Humidity: ${fHum}%</p>
+      <p class="text-xl">Wind(m/s):${fwindspeed} (deg):${fwinddeg}</p> 
+      <p class="text-xl">${fDesc}</p>
+      <p class="text-xl">${fWeather.emoji}</p>
     `;
 
     forecast.appendChild(card);
   });
 }
 
-function weatherEmoji(weatherId) {}
+function weatherEmoji(weatherId) {
+  switch (true) {
+    case weatherId >= 200 && weatherId < 300:
+      return {
+        emoji: "⛈️",
+        bg: "linear-gradient(135deg, #1f2937, #ca8a04, #1e40af)",
+      }; //thunderstorm
+    case weatherId >= 300 && weatherId < 400:
+      return {
+        emoji: "🌦️",
+        bg: "linear-gradient(135deg, #60a5fa, #3b82f6)",
+      }; //drizzle
+    case weatherId >= 500 && weatherId < 600:
+      return { emoji: "🌧️", bg: "linear-gradient(135deg, #1e3a8a, #475569)" }; //rain
+    case weatherId >= 600 && weatherId < 700:
+      return { emoji: "🌨️", bg: "linear-gradient(135deg, #e2e8f0, #cbd5e1)" }; //snow
+    case weatherId >= 700 && weatherId < 800:
+      return { emoji: "🌫️", bg: "linear-gradient(135deg, #64748b, #475569)" }; //fog
+    case weatherId == 800:
+      return {
+        emoji: "☀️",
+        bg: "linear-gradient(135deg, #d97706, #f97316, #b91c1c)",
+      }; //sunny
+    case weatherId >= 801 && weatherId < 810:
+      return { emoji: "🌥️", bg: "linear-gradient(135deg, #facc15, #f1f5f9)" }; //cloudy
+    default:
+      return {
+        emoji: "🌈",
+        bg: "linear-gradient(135deg, #facc15, #db2777)",
+      };
+  }
+}
 
 function displayError(msg) {
   errorMsg.textContent = msg;
@@ -106,6 +145,7 @@ function displayError(msg) {
   City.textContent = "";
   date.textContent = "";
   Temp.textContent = "";
+  wind.textContent = "";
   humidity.textContent = "";
   Description.textContent = "";
   WeatherIcon.textContent = "";
