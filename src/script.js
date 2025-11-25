@@ -14,6 +14,9 @@ const forecast = document.getElementById("forecast");
 
 const apiKey = "eb633ce525f89f1c11e0709bceb0108d";
 
+let isCelsius = true;
+let StoredData = null;
+
 WeatherForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const CityN = cityName.value.trim();
@@ -49,6 +52,7 @@ async function weatherData(city) {
 }
 
 function displayweather(data) {
+  StoredData = data;
   forecast.innerHTML = "";
   displaycard.classList.remove("hidden");
   errorMsg.classList.add("hidden");
@@ -64,7 +68,7 @@ function displayweather(data) {
   const todayWD = today.wind.deg;
 
   date.textContent = todayDate;
-  Temp.textContent = `Temperature: ${todayTemp}°C`;
+  Temp.textContent = `${todayTemp}°C`;
   humidity.textContent = `Humidity: ${todayHumidity}%`;
   wind.textContent = `Wind: ${todayWS} m/s, ${todayWD}°`;
   Description.textContent = todayDesc;
@@ -90,7 +94,7 @@ function displayweather(data) {
 
     card.innerHTML = `
       <h3 class="text-lg font-bold">${fDate}</h3>
-      <p class="text-xl">${fTemp}°C</p>
+      <p class="text-xl tempval">${fTemp}°C</p>
       <p class="text-xl">Humidity: ${fHum}%</p>
       <p class="text-xl">Wind(m/s):${fwindspeed} (deg):${fwinddeg}</p> 
       <p class="text-xl">${fDesc}</p>
@@ -152,7 +156,25 @@ function displayError(msg) {
   Toggle.classList.add("hidden");
 }
 
-function ToggleTemp() {}
+function ToggleTemp() {
+  isCelsius = !isCelsius;
+  Toggle.textContent = isCelsius ? "Switch to °F" : "Switch to °C";
+
+  const temp = document.querySelectorAll(".tempval");
+
+  temp.forEach((e) => {
+    let val = parseFloat(e.textContent);
+    let newval;
+
+    if (isCelsius) {
+      newval = Math.round((val * 9) / 5 + 32);
+      e.textContent = `${newval}°F`;
+    } else {
+      newval = Math.round(((val - 32) * 5) / 9);
+      e.textContent = `${newval}°C`;
+    }
+  });
+}
 
 function Dropdownmenu() {}
 
