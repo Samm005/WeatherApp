@@ -42,7 +42,7 @@ async function weatherData(city) {
   const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
   const response = await fetch(apiURL);
 
-  console.log(response);
+  //console.log(response);
 
   if (!response.ok) {
     throw new Error("Could not fetch weather data");
@@ -178,4 +178,31 @@ function ToggleTemp() {
 
 function Dropdownmenu() {}
 
-function CurrentLoc() {}
+function CurrentLoc() {
+  cityName.value = "";
+  let long;
+  let lat;
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      //console.log(pos);
+      long = pos.coords.longitude;
+      lat = pos.coords.latitude;
+
+      const apiURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`;
+
+      fetch(apiURL)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          displayweather(data);
+        })
+        .catch(() => {
+          displayError("Unable to fetch weather");
+        });
+    });
+  } else {
+    displayError("Geolocation not available");
+  }
+}

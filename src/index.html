@@ -35,6 +35,7 @@
         <button
           id="CurrentLocation"
           type="button"
+          onclick="CurrentLoc()"
           class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95"
         >
           <i class="fa-solid fa-location-crosshairs"></i>
@@ -48,14 +49,14 @@
       ></select>
     </div>
 
-    <br /><br />
+    <br />
     <!--Displaying the weather at selected area-->
     <main
       id="displayCard"
-      class="hidden flex flex-col items-center justify-center w-full mt-10 mb-24"
+      class="hidden flex flex-col items-center justify-center w-full mb-24"
     >
       <article
-        class="p-3 m-2 rounded-2xl size-80 bg-conic/decreasing from-violet-700 via-lime-300 to-violet-700 shadow-xl/65 border-2 max-w-[500px] flex flex-col items-center"
+        class="p-3 m-2 rounded-2xl min-h-[350px] bg-conic/decreasing from-violet-700 via-lime-300 to-violet-700 shadow-xl/65 border-2 max-w-[500px] flex flex-col items-center"
       >
         <h3 id="City" class="text-2xl font-bold mt-0 mb-2"></h3>
         <p id="date" class="text-xl mb-3 font-semibold"></p>
@@ -77,6 +78,7 @@
           Switch to &degF</button
         ><br />
       </article>
+      <br />
       <div id="forecast" class="flex flex-wrap justify-center gap-6 p-1"></div>
     </main>
     <script src="script.js"></script>
