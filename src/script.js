@@ -62,6 +62,7 @@ function displayweather(data) {
   const today = data.list[0];
   const todayDate = new Date(today.dt * 1000).toDateString();
   const todayTemp = Math.round(today.main.temp - 273.15);
+  weatherAlert(todayTemp);
   const todayHumidity = today.main.humidity;
   const todayDesc = today.weather[0].description;
   const todayweatherid = today.weather[0].id;
@@ -179,11 +180,13 @@ function ToggleTemp() {
 }
 
 function Dropdownmenu(citySelect = null) {
-  let cities = JSON.parse(localStorage.getItem("cities")) || [];
+  let cities = JSON.parse(localStorage.getItem("cities") || "[]");
 
-  if (citySelect && !cities.includes(cityName)) {
-    cities.push(citySelect);
+  if (citySelect && !cities.includes(citySelect)) {
+    cities.unshift(citySelect);
   }
+
+  cities = cities.slice(0, 6);
 
   localStorage.setItem("cities", JSON.stringify(cities));
 
@@ -198,13 +201,17 @@ function Dropdownmenu(citySelect = null) {
 
   cities.forEach((city) => {
     const option = document.createElement("option");
+    option.value = city;
     option.textContent = city;
     dropdown.appendChild(option);
   });
 
+  dropdown.value = citySelect;
+
   dropdown.onchange = () => {
     const selected = dropdown.value;
     cityName.value = selected;
+    forecast.innerHTML = "";
     WeatherForm.dispatchEvent(new Event("submit"));
   };
 }
@@ -237,3 +244,22 @@ function CurrentLoc() {
     displayError("Geolocation not available");
   }
 }
+
+function weatherAlert(temp) {
+  const alertBox = document.getElementById("alertMsg");
+
+  if (temp >= 40) {
+    alertBox.textContent =
+      "⚠️ It's hot outside. Stay cool. Stay hydrated. Stay informed";
+    alertBox.style.color = "red";
+  } else if (temp <= 5) {
+    alertBox.textContent = "❄️ Freezing weather. Stay indoors if possible. ";
+    alertBox.style.color = "blue";
+  } else {
+    alertBox.textContent = "";
+  }
+}
+
+window.onload = () => {
+  Dropdownmenu();
+};
