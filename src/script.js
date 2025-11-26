@@ -18,6 +18,7 @@ const apiKey = "eb633ce525f89f1c11e0709bceb0108d";
 let isCelsius = true;
 let StoredData = null;
 
+//On submitting form what happens
 WeatherForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const CityN = cityName.value.trim();
@@ -39,6 +40,7 @@ WeatherForm.addEventListener("submit", async (event) => {
   }
 });
 
+//Get the data from OpenWeatherAPI
 async function weatherData(city) {
   const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
   const response = await fetch(apiURL);
@@ -52,6 +54,7 @@ async function weatherData(city) {
   return await response.json();
 }
 
+//Displaying the weather after collecting weather data
 function displayweather(data) {
   StoredData = data;
   forecast.innerHTML = "";
@@ -108,6 +111,7 @@ function displayweather(data) {
   Dropdownmenu(data.city.name);
 }
 
+//Return background and emoji
 function weatherEmoji(weatherId) {
   switch (true) {
     case weatherId >= 200 && weatherId < 300:
@@ -141,6 +145,7 @@ function weatherEmoji(weatherId) {
   }
 }
 
+//What error message must be displayed
 function displayError(msg) {
   errorMsg.textContent = msg;
   errorMsg.style.color = "darkred";
@@ -159,6 +164,7 @@ function displayError(msg) {
   Toggle.classList.add("hidden");
 }
 
+//Changing temperature from  C to F and vice versa
 function ToggleTemp() {
   isCelsius = !isCelsius;
   Toggle.textContent = isCelsius ? "Switch to °F" : "Switch to °C";
@@ -179,6 +185,7 @@ function ToggleTemp() {
   });
 }
 
+//Dropdownmenu is being implemented
 function Dropdownmenu(citySelect = null) {
   let cities = JSON.parse(localStorage.getItem("cities")) || [];
 
@@ -216,6 +223,7 @@ function Dropdownmenu(citySelect = null) {
   };
 }
 
+//Gives currentLocation using latitude and longitude
 function CurrentLoc() {
   cityName.value = "";
   let long;
@@ -245,6 +253,7 @@ function CurrentLoc() {
   }
 }
 
+//A alert to show if temperature is extreme
 function weatherAlert(temp) {
   const alertBox = document.getElementById("alertMsg");
 
