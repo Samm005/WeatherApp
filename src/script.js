@@ -11,6 +11,7 @@ const WeatherIcon = document.getElementById("WeatherIcon");
 const Toggle = document.getElementById("Toggle");
 const errorMsg = document.getElementById("Errormsg");
 const forecast = document.getElementById("forecast");
+const dropdown = document.getElementById("Dropdown");
 
 const apiKey = "eb633ce525f89f1c11e0709bceb0108d";
 
@@ -103,6 +104,7 @@ function displayweather(data) {
 
     forecast.appendChild(card);
   });
+  Dropdownmenu(data.city.name);
 }
 
 function weatherEmoji(weatherId) {
@@ -176,7 +178,36 @@ function ToggleTemp() {
   });
 }
 
-function Dropdownmenu() {}
+function Dropdownmenu(citySelect = null) {
+  let cities = JSON.parse(localStorage.getItem("cities")) || [];
+
+  if (citySelect && !cities.includes(cityName)) {
+    cities.push(citySelect);
+  }
+
+  localStorage.setItem("cities", JSON.stringify(cities));
+
+  dropdown.innerHTML = "";
+
+  if (cities.length == 0) {
+    dropdown.classList.add("hidden");
+    return;
+  }
+
+  dropdown.classList.remove("hidden");
+
+  cities.forEach((city) => {
+    const option = document.createElement("option");
+    option.textContent = city;
+    dropdown.appendChild(option);
+  });
+
+  dropdown.onchange = () => {
+    const selected = dropdown.value;
+    cityName.value = selected;
+    WeatherForm.dispatchEvent(new Event("submit"));
+  };
+}
 
 function CurrentLoc() {
   cityName.value = "";
