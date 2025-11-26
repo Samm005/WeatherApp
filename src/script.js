@@ -180,7 +180,7 @@ function ToggleTemp() {
 }
 
 function Dropdownmenu(citySelect = null) {
-  let cities = JSON.parse(localStorage.getItem("cities") || "[]");
+  let cities = JSON.parse(localStorage.getItem("cities")) || [];
 
   if (citySelect && !cities.includes(citySelect)) {
     cities.unshift(citySelect);
