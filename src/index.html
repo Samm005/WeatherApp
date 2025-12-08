@@ -15,24 +15,24 @@
     class="font-serif bg-linear-to-r/increasing from-green-500 to-pink-600 m-0"
   >
     <div
-      class="flex flex-row max-sm:flex-col items-center justify-center gap-6"
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 flex-wrap w-full px-4"
     >
       <!--Form for weather data-->
       <form
         id="Weather"
-        class="m-6 flex flex-row max-sm:flex-col justify-center gap-6 items-center"
+        class="m-6 flex flex-col sm:flex-row justify-center gap-4 items-center flex-wrap w-full"
       >
         <input
           type="text"
           placeholder="Enter City Name"
           id="cityName"
-          class="p-3 text-2xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900 sm:w-64 md:w-80 sm:text-lg md:text-xl"
+          class="p-3 text-lg md:text-xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900 w-[90%] max-w-[350px] sm:w-64 md:w-72 lg:w-80"
         />
         <!--Select the city to search-->
         <button
           id="search"
           type="submit"
-          class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95 sm:w-64 md:w-80 sm:text-xl md:text-2xl"
+          class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95 w-16 sm:w-20 md:w-24 sm:text-xl md:text-2xl text-center"
         >
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -41,17 +41,17 @@
           id="CurrentLocation"
           type="button"
           onclick="CurrentLoc()"
-          class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95 sm:w-64 md:w-80 sm:text-xl md:text-2xl"
+          class="p-3 text-3xl cursor-pointer hover:text-red-900 hover:scale-95 w-16 sm:w-20 md:w-24 sm:text-xl md:text-2xl text-center"
         >
           <i class="fa-solid fa-location-crosshairs"></i>
         </button>
-      </form>
 
-      <!--Dropdown menu to show history -->
-      <select
-        id="Dropdown"
-        class="hidden w-full sm:w-64 md:w-80 p-3 text-2xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900 bg-white text-purple-900 shadow-md cursor-pointer hover:border-purple-900"
-      ></select>
+        <!--Dropdown menu to show history -->
+        <select
+          id="Dropdown"
+          class="hidden p-3 text-xl font-bold border-2 rounded-2xl hover:scale-95 border-red-900 bg-white text-purple-900 shadow-md cursor-pointer hover:border-purple-900 w-[90%] max-w-[350px] sm:w-64 md:w-72 lg:w-80"
+        ></select>
+      </form>
     </div>
 
     <br />
@@ -117,3 +117,5 @@
     <script src="script.js"></script>
   </body>
 </html>
+
+<!--GITHUBLINK:https://github.com/Samm005/WeatherApp-->

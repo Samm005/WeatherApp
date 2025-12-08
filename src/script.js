@@ -1,3 +1,5 @@
+//GITHUBLINK:https://github.com/Samm005/WeatherApp
+
 const WeatherForm = document.getElementById("Weather");
 const cityName = document.getElementById("cityName");
 const displaycard = document.getElementById("displayCard");
